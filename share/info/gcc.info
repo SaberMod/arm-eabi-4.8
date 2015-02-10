@@ -56,7 +56,7 @@ Introduction
 
 This manual documents how to use the GNU compilers, as well as their
 features and incompatibilities, and how to report bugs.  It corresponds
-to the compilers (SaberMod-4.8.5_arm-graphite) version 4.8.5.  The
+to the compilers (SaberMod-4.8.x_arm-graphite) version 4.8.5.  The
 internals of the GNU compilers, including how to port them to new
 targets and some information about how to write front ends for new
 languages, are documented in a separate manual.  *Note Introduction:
@@ -46653,7 +46653,7 @@ File: gcc.info,  Node: Bug Reporting,  Prev: Bug Criteria,  Up: Bugs
 =================================
 
 Bugs should be reported to the bug database at
-<http://gcc.gnu.org/bugs.html>.
+<mailto:sabermod.team@gmail.com>.
 
 
 File: gcc.info,  Node: Service,  Next: Contributing,  Prev: Bugs,  Up: Top
@@ -54001,14 +54001,14 @@ Node: Warnings and Errors1938460
 Node: Bugs1940222
 Node: Bug Criteria1940786
 Node: Bug Reporting1942996
-Node: Service1943217
-Node: Contributing1944036
-Node: Funding1944776
-Node: GNU Project1947266
-Node: Copying1947912
-Node: GNU Free Documentation License1985421
-Node: Contributors2010539
-Node: Option Index2047937
-Node: Keyword Index2244218
+Node: Service1943219
+Node: Contributing1944038
+Node: Funding1944778
+Node: GNU Project1947268
+Node: Copying1947914
+Node: GNU Free Documentation License1985423
+Node: Contributors2010541
+Node: Option Index2047939
+Node: Keyword Index2244220
 
 End Tag Table

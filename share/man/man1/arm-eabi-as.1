@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "AS 1"
-.TH AS 1 "2014-12-28" "binutils-2.24.51" "GNU Development Tools"
+.TH AS 1 "2015-02-09" "binutils-2.25.51" "GNU Development Tools"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -261,10 +261,12 @@ as [\fB\-a\fR[\fBcdghlns\fR][=\fIfile\fR]] [\fB\-\-alternate\fR] [\fB\-D\fR]
    [\fB\-g\fR[\fIdebug level\fR]] [\fB\-G\fR \fInum\fR] [\fB\-KPIC\fR] [\fB\-call_shared\fR]
    [\fB\-non_shared\fR] [\fB\-xgot\fR [\fB\-mvxworks\-pic\fR]
    [\fB\-mabi\fR=\fI\s-1ABI\s0\fR] [\fB\-32\fR] [\fB\-n32\fR] [\fB\-64\fR] [\fB\-mfp32\fR] [\fB\-mgp32\fR]
+   [\fB\-mfp64\fR] [\fB\-mgp64\fR] [\fB\-mfpxx\fR]
+   [\fB\-modd\-spreg\fR] [\fB\-mno\-odd\-spreg\fR]
    [\fB\-march\fR=\fI\s-1CPU\s0\fR] [\fB\-mtune\fR=\fI\s-1CPU\s0\fR] [\fB\-mips1\fR] [\fB\-mips2\fR]
    [\fB\-mips3\fR] [\fB\-mips4\fR] [\fB\-mips5\fR] [\fB\-mips32\fR] [\fB\-mips32r2\fR]
-   [\fB\-mips32r3\fR] [\fB\-mips32r5\fR] [\fB\-mips64\fR] [\fB\-mips64r2\fR]
-   [\fB\-mips64r3\fR] [\fB\-mips64r5\fR] 
+   [\fB\-mips32r3\fR] [\fB\-mips32r5\fR] [\fB\-mips32r6\fR] [\fB\-mips64\fR] [\fB\-mips64r2\fR]
+   [\fB\-mips64r3\fR] [\fB\-mips64r5\fR] [\fB\-mips64r6\fR]
    [\fB\-construct\-floats\fR] [\fB\-no\-construct\-floats\fR]
    [\fB\-mnan=\fR\fIencoding\fR]
    [\fB\-trap\fR] [\fB\-no\-break\fR] [\fB\-break\fR] [\fB\-no\-trap\fR]
@@ -371,6 +373,9 @@ as [\fB\-a\fR[\fBcdghlns\fR][=\fIfile\fR]] [\fB\-\-alternate\fR] [\fB\-D\fR]
 .PP
 \&\fITarget TILE-Gx options:\fR
    [\fB\-m32\fR|\fB\-m64\fR][\fB\-EB\fR][\fB\-EL\fR]
+.PP
+\&\fITarget Visium options:\fR
+   [\fB\-mtune=\fR\fIarch\fR]
 .PP
 \&\fITarget Xtensa options:\fR
  [\fB\-\-[no\-]text\-section\-literals\fR] [\fB\-\-[no\-]absolute\-literals\fR]
@@ -696,8 +701,10 @@ message if an attempt is made to assemble an instruction which will not execute
 on the target processor.  The following processor names are recognized:
 \&\f(CW\*(C`cortex\-a53\*(C'\fR,
 \&\f(CW\*(C`cortex\-a57\*(C'\fR,
+\&\f(CW\*(C`thunderx\*(C'\fR,
+\&\f(CW\*(C`xgene1\*(C'\fR
 and
-\&\f(CW\*(C`xgene\-1\*(C'\fR.
+\&\f(CW\*(C`xgene2\*(C'\fR.
 The special name \f(CW\*(C`all\*(C'\fR may be used to allow the assembler to accept
 instructions valid for any supported processor, including all optional
 extensions.
@@ -1042,16 +1049,28 @@ accept various extension mnemonics.  For example,
 \&\f(CW\*(C`smap\*(C'\fR,
 \&\f(CW\*(C`mpx\*(C'\fR,
 \&\f(CW\*(C`sha\*(C'\fR,
+\&\f(CW\*(C`prefetchwt1\*(C'\fR,
+\&\f(CW\*(C`clflushopt\*(C'\fR,
+\&\f(CW\*(C`se1\*(C'\fR,
+\&\f(CW\*(C`clwb\*(C'\fR,
+\&\f(CW\*(C`pcommit\*(C'\fR,
 \&\f(CW\*(C`avx512f\*(C'\fR,
 \&\f(CW\*(C`avx512cd\*(C'\fR,
 \&\f(CW\*(C`avx512er\*(C'\fR,
 \&\f(CW\*(C`avx512pf\*(C'\fR,
+\&\f(CW\*(C`avx512vl\*(C'\fR,
+\&\f(CW\*(C`avx512bw\*(C'\fR,
+\&\f(CW\*(C`avx512dq\*(C'\fR,
+\&\f(CW\*(C`avx512ifma\*(C'\fR,
+\&\f(CW\*(C`avx512vbmi\*(C'\fR,
 \&\f(CW\*(C`noavx\*(C'\fR,
 \&\f(CW\*(C`vmx\*(C'\fR,
 \&\f(CW\*(C`vmfunc\*(C'\fR,
 \&\f(CW\*(C`smx\*(C'\fR,
 \&\f(CW\*(C`xsave\*(C'\fR,
 \&\f(CW\*(C`xsaveopt\*(C'\fR,
+\&\f(CW\*(C`xsavec\*(C'\fR,
+\&\f(CW\*(C`xsaves\*(C'\fR,
 \&\f(CW\*(C`aes\*(C'\fR,
 \&\f(CW\*(C`pclmul\*(C'\fR,
 \&\f(CW\*(C`fsgsbase\*(C'\fR,
@@ -1177,6 +1196,35 @@ if such prefix was not explicitly specified in the source code.
 .IX Item "-mbig-obj"
 On x86\-64 \s-1PE/COFF\s0 target this option forces the use of big object file
 format, which allows more than 32768 sections.
+.IP "\fB\-momit\-lock\-prefix=\fR\fIno\fR" 4
+.IX Item "-momit-lock-prefix=no"
+.PD 0
+.IP "\fB\-momit\-lock\-prefix=\fR\fIyes\fR" 4
+.IX Item "-momit-lock-prefix=yes"
+.PD
+These options control how the assembler should encode lock prefix.
+This option is intended as a workaround for processors, that fail on
+lock prefix. This option can only be safely used with single-core,
+single-thread computers
+\&\fB\-momit\-lock\-prefix=\fR\fIyes\fR will omit all lock prefixes.
+\&\fB\-momit\-lock\-prefix=\fR\fIno\fR will encode lock prefix as usual,
+which is the default.
+.IP "\fB\-mevexrcig=\fR\fIrne\fR" 4
+.IX Item "-mevexrcig=rne"
+.PD 0
+.IP "\fB\-mevexrcig=\fR\fIrd\fR" 4
+.IX Item "-mevexrcig=rd"
+.IP "\fB\-mevexrcig=\fR\fIru\fR" 4
+.IX Item "-mevexrcig=ru"
+.IP "\fB\-mevexrcig=\fR\fIrz\fR" 4
+.IX Item "-mevexrcig=rz"
+.PD
+These options control how the assembler should encode SAE-only
+\&\s-1EVEX\s0 instructions.  \fB\-mevexrcig=\fR\fIrne\fR will encode \s-1RC\s0 bits
+of \s-1EVEX\s0 instruction with 00, which is the default.
+\&\fB\-mevexrcig=\fR\fIrd\fR, \fB\-mevexrcig=\fR\fIru\fR
+and \fB\-mevexrcig=\fR\fIrz\fR will encode SAE-only \s-1EVEX\s0 instructions
+with 01, 10 and 11 \s-1RC\s0 bits, respectively.
 .PP
 The following options are available when as is configured for the
 Intel 80960 processor.
@@ -1680,6 +1728,20 @@ Select the word size, either 32 bits or 64 bits.
 .IX Item "-EB | -EL"
 Select the endianness, either big-endian (\-EB) or little-endian (\-EL).
 .PP
+The following option is available when as is configured for a Visium
+processor.
+.IP "\fB\-mtune=\fR\fIarch\fR" 4
+.IX Item "-mtune=arch"
+This option specifies the target architecture.  If an attempt is made to
+assemble an instruction that will not execute on the target architecture,
+the assembler will issue an error message.
+.Sp
+The following names are recognized:
+\&\f(CW\*(C`mcm24\*(C'\fR
+\&\f(CW\*(C`mcm\*(C'\fR
+\&\f(CW\*(C`gr5\*(C'\fR
+\&\f(CW\*(C`gr6\*(C'\fR
+.PP
 The following options are available when as is configured for an
 Xtensa processor.
 .IP "\fB\-\-text\-section\-literals | \-\-no\-text\-section\-literals\fR" 4
@@ -1790,7 +1852,7 @@ Treat undocumented Z80 instructions that do not work on R800 as errors.
 \&\fIgcc\fR\|(1), \fIld\fR\|(1), and the Info entries for \fIbinutils\fR and \fIld\fR.
 .SH "COPYRIGHT"
 .IX Header "COPYRIGHT"
-Copyright (c) 1991\-2014 Free Software Foundation, Inc.
+Copyright (c) 1991\-2015 Free Software Foundation, Inc.
 .PP
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the \s-1GNU\s0 Free Documentation License, Version 1.3
